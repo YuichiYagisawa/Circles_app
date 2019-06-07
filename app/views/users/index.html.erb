@@ -2,6 +2,26 @@
 
 <h1>Users</h1>
 
+<% if logged_in? %>
+  <li><%= link_to "Users", '#' %></li>
+  <%= @current_user.user_name %>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      Account <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Profile", current_user %></li>
+      <li><%= link_to "Settings", '#' %></li>
+      <li class="divider"></li>
+      <li>
+        <%= link_to "Log out", logout_path, method: :delete %>
+      </li>
+    </ul>
+  </li>
+<% else %>
+  <li><%= link_to "Log in", login_path %></li>
+<% end %>
+
 <table>
   <thead>
     <tr>
