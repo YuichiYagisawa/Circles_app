@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Circles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Circle name</th>
+      <th>Circle email</th>
+      <th>Circle info</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @circles.each do |circle| %>
+      <tr>
+        <td><%= circle.circle_name %></td>
+        <td><%= circle.circle_email %></td>
+        <td><%= circle.circle_info %></td>
+        <td><%= link_to 'Show', circle %></td>
+        <td><%= link_to 'Edit', edit_circle_path(circle) %></td>
+        <td><%= link_to 'Destroy', circle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Circle', new_circle_path %>

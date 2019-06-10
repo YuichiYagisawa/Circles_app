@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Circle name:</strong>
+  <%= @circle.circle_name %>
+</p>
+
+<p>
+  <strong>Circle email:</strong>
+  <%= @circle.circle_email %>
+</p>
+
+<p>
+  <strong>Circle info:</strong>
+  <%= @circle.circle_info %>
+</p>
+
+<%= link_to 'Edit', edit_circle_path(@circle) %> |
+<%= link_to 'Back', circles_path %>
+
+<section class="micropost_form">
+  <%= form_for(@micropost) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="field">
+      <%= f.text_area :circle_content, placeholder: "Compose new micropost..." %>
+    </div>
+    <%= f.submit "Post", class: "btn btn-primary" %>
+  <% end %>
+</section>
+
+<div class="col-md-8">
+  <% if @circle.microposts.any? %>
+    <h3>Microposts (<%= @circle.microposts.count %>)</h3>
+    <ol class="microposts">
+      <%= render @microposts %>
+    </ol>
+  <% end %>
+</div>
