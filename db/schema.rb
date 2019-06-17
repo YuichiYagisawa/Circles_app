@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_07_105547) do
+ActiveRecord::Schema.define(version: 2019_06_14_081928) do
 
   create_table "circles", force: :cascade do |t|
     t.string "circle_name"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 2019_06_07_105547) do
     t.index ["circle_id", "user_id", "created_at"], name: "index_microposts_on_circle_id_and_user_id_and_created_at"
     t.index ["circle_id"], name: "index_microposts_on_circle_id"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "user_circle_relationships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "circle_id"
+    t.integer "admin", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_user_circle_relationships_on_circle_id"
+    t.index ["user_id", "circle_id"], name: "index_user_circle_relationships_on_user_id_and_circle_id", unique: true
+    t.index ["user_id"], name: "index_user_circle_relationships_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
