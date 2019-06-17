@@ -1,4 +1,5 @@
 class CirclesController < ApplicationController
+  before_action :logged_in_user
   before_action :set_circle, only: [:show, :edit, :update, :destroy]
 
   # GET /circles
@@ -11,12 +12,13 @@ class CirclesController < ApplicationController
   # GET /circles/1.json
   def show
     @circle = Circle.find(params[:id])
-    @microposts = @circle.microposts
+    # @microposts = @circle.microposts
   end
 
   # GET /circles/new
   def new
     @circle = Circle.new
+    # @circle.user_circle_relationship.build
   end
 
   # GET /circles/1/edit
@@ -27,9 +29,22 @@ class CirclesController < ApplicationController
   # POST /circles.json
   def create
     @circle = Circle.new(circle_params)
+    # user = @current_user.id
+    # @relationship = UserCircleRelationship.new(
+    #   user_id: user,
+    #   circle_id: @circle.id,
+    #   admin: 3
+    # )
+    @circle.save
+    @relationship = UserCircleRelationship.new(
+      user_id: current_user.id,
+      circle_id: @circle.id,
+      admin: 3
+    )
 
     respond_to do |format|
-      if @circle.save
+      if @relationship.save
+        # @relationship.save
         format.html { redirect_to @circle, notice: 'Circle was successfully created.' }
         format.json { render :show, status: :created, location: @circle }
       else
@@ -71,6 +86,9 @@ class CirclesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def circle_params
-      params.require(:circle).permit(:circle_name, :circle_email, :circle_info)
+      params.require(:circle).permit(
+          :circle_name, :circle_email, :circle_info,
+          # user_circle_relationship_attributes: [@current_user.id, :circle_id, admin: 3]
+      )
     end
 end

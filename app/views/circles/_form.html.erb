@@ -26,6 +26,11 @@
     <%= form.text_area :circle_info %>
   </div>
 
+  <%#= f.fields_for :user_circle_relationships do |f| %>
+    <%#= f.hidden_field :user_id, value: @current_user.id %>
+    <%#= f.hidden_field :admin, value: 3 %>
+  <%# end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
