@@ -17,7 +17,7 @@
 
 <%= link_to 'Edit', edit_circle_path(@circle) %> |
 <%= link_to 'Back', circles_path %> |
-<%= link_to 'New micropost', new_micropost_path %>
+<%= link_to 'New micropost', circle_micropost_new_path(@circle) %>
 
 <!--  <section class="micropost_form">-->
     <%#= form_for(@micropost) do |f| %>
@@ -29,10 +29,10 @@
     <%# end %>
 <!--  </section>-->
 
-<%# if @circle.microposts.any? %>
+<%# if @microposts.any? %>
   <div class="container">
-  <% @circle.microposts.each do |micropost| %>
-    <%= link_to micropost.content, micropost_path %>
+  <% @microposts.each do |micropost| %>
+    <%= link_to micropost.content, circle_micropost_path(circle_id: @circle.id) %>
   <% end %>
   </div>
 <%# end %>

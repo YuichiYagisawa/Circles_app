@@ -12,7 +12,8 @@ class CirclesController < ApplicationController
   # GET /circles/1.json
   def show
     @circle = Circle.find(params[:id])
-    # @microposts = @circle.microposts
+    # @microposts.circle_id = Circle.find(params[:id])
+    @microposts = @circle.microposts
   end
 
   # GET /circles/new
@@ -29,12 +30,6 @@ class CirclesController < ApplicationController
   # POST /circles.json
   def create
     @circle = Circle.new(circle_params)
-    # user = @current_user.id
-    # @relationship = UserCircleRelationship.new(
-    #   user_id: user,
-    #   circle_id: @circle.id,
-    #   admin: 3
-    # )
     @circle.save
     @relationship = UserCircleRelationship.new(
       user_id: current_user.id,
@@ -87,8 +82,7 @@ class CirclesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def circle_params
       params.require(:circle).permit(
-          :circle_name, :circle_email, :circle_info,
-          # user_circle_relationship_attributes: [@current_user.id, :circle_id, admin: 3]
+          :circle_name, :circle_email, :circle_info
       )
     end
 end
