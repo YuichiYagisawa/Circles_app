@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :circles do
     # member do
       get '/micropost/new', to: 'microposts#new'
-      get '/micropost/:id', to: 'microposts#show', as: 'micropost'
+      # get '/micropost/:micropost_id', to: 'microposts#show', as: 'micropost'
       post 'micropost/create', to: 'microposts#create'
       get '/micropost/:id/edit', to: 'microposts#edit', as: 'micropost_edit'
       post '/micropost/:id/update', to: 'microposts#update'

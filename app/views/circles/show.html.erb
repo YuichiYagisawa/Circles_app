@@ -32,7 +32,8 @@
 <%# if @microposts.any? %>
   <div class="container">
   <% @microposts.each do |micropost| %>
-    <%= link_to micropost.content, circle_micropost_path(circle_id: @circle.id) %>
+      <%= micropost.content %><br>
+    <%#= link_to micropost.content, circle_micropost_path(circle_id: @circle.id, id: @micropost.id) %>
   <% end %>
   </div>
 <%# end %>
