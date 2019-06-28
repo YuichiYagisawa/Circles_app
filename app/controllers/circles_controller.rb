@@ -73,6 +73,67 @@ class CirclesController < ApplicationController
     end
   end
 
+  def followers
+    @followers = UserCircleRelationship.where(circle_id: params[:circle_id])
+  end
+
+  def follow
+    @relationship = UserCircleRelationship.new(
+        user_id: current_user.id,
+        circle_id: params[:circle_id],
+        admin: 1
+    )
+    respond_to do |format|
+      if @relationship.save
+        format.html { redirect_to circle_path(params[:circle_id]), notice: 'Circle was successfully created.' }
+        format.json { render :show, status: :created, location: @circle }
+      else
+        format.html { render :new }
+        format.json { render json: @circle.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def unfollow
+    @relationship = UserCircleRelationship.find_by(user_id: current_user.id)
+    @relationship.destroy
+    redirect_to circle_path(params[:circle_id])
+  end
+
+  def member
+    @member = UserCircleRelationship.find_by(
+        circle_id: params[:circle_id],
+        user_id: params[:user_id]
+    )
+    @member.admin = 2
+    respond_to do |format|
+      if @member.save
+        format.html { redirect_to circle_path(params[:circle_id]), notice: 'Circle was successfully created.' }
+        format.json { render :show, status: :created, location: @circle }
+      else
+        format.html { render :new }
+        format.json { render json: @circle.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def unmember
+    @member = UserCircleRelationship.find_by(
+        circle_id: params[:circle_id],
+        user_id: params[:user_id]
+    )
+    @member.admin = 1
+    respond_to do |format|
+      if @member.save
+        format.html { redirect_to circle_path(params[:circle_id]), notice: 'Circle was successfully created.' }
+        format.json { render :show, status: :created, location: @circle }
+      else
+        format.html { render :new }
+        format.json { render json: @circle.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_circle

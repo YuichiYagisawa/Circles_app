@@ -7,8 +7,8 @@ class CreateUserCircleRelationships < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    # add_index :user_circle_relationships, :user_id
-    # add_index :user_circle_relationships, :circle_id
-    add_index :user_circle_relationships, [:user_id, :circle_id], unique:  true
+    add_index :user_circle_relationships, :user_id
+    add_index :user_circle_relationships, :circle_id
+    add_index :user_circle_relationships, [:user_id, :circle_id], unique: true
   end
 end

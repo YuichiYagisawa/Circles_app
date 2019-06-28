@@ -1,0 +1,5 @@
+<% @followers.each do |follower| %>
+  <%= follower.user_id %>
+  <%= link_to 'Member', circle_member_path(:circle_id => follower.circle_id, :user_id => follower.user_id), method: :post %>
+  <%= link_to 'Unmember', circle_unmember_path(:circle_id => follower.circle_id, :user_id => follower.user_id), method: :post %><br>
+<% end %>

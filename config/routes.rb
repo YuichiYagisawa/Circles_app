@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   resources :users
   resources :circles do
     # member do
+     get :followers
+     post :follow
+     delete :unfollow
+     post :member
+     post :unmember
       get '/micropost/new', to: 'microposts#new'
       # get '/micropost/:micropost_id', to: 'microposts#show', as: 'micropost'
       post 'micropost/create', to: 'microposts#create'
@@ -15,6 +20,8 @@ Rails.application.routes.draw do
       post '/micropost/:id/update', to: 'microposts#update'
       delete '/micropost/:id/destroy', to: 'microposts#destroy'
       # resources :microposts
+      # get :member
+      # post :follow
     # end
   end
   # ``, only: [:create, :destroy]

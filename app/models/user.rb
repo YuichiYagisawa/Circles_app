@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :circles, through: :user_circle_relationahips
-  has_many :user_circle_relationships
+  has_many :user_circle_relationships, foreign_key: "circle_id"
   # has_many :microposts, dependent: :destroy
   attr_accessor :remember_token
   before_save { self.user_email = user_email.downcase }

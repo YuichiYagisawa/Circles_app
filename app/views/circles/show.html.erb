@@ -17,7 +17,10 @@
 
 <%= link_to 'Edit', edit_circle_path(@circle) %> |
 <%= link_to 'Back', circles_path %> |
-<%= link_to 'New micropost', circle_micropost_new_path(@circle) %>
+<%= link_to 'New micropost', circle_micropost_new_path(@circle) %> |
+<%= link_to 'Follow', circle_follow_path(@circle), method: :post %> |
+<%= link_to 'Unfollow', circle_unfollow_path(@circle), method: :delete %> |
+<%= link_to 'Circle followers', circle_followers_path(@circle) %>
 
 <!--  <section class="micropost_form">-->
     <%#= form_for(@micropost) do |f| %>
